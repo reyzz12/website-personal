@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewsport" content="width=device-width, initial-scale=1.0">
+        <title>SOUNDSENSE</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Genty&display=swap">
+        <style>
+            body {
+                background-image: url(img/SOAL1.JPG);
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                margin: 0;
+                padding: 0;
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: scroll;
+            }
+            .quiz-container {
+                margin-top: 10%;
+                display: grid;
+                grid-template-columns: repeat(2, 250px);
+                gap: 20px;
+            }
+            .quiz-button {
+                width: 250px;
+                height: 250px;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                background-size: cover;
+                background-position: center;
+                transition: transform 0.3s ease;
+            }
+            .quiz-button:hover{
+                transform: scale(1.1);
+            }
+            audio {
+                position: absolute;
+                z-index: 10;
+                top: 15%;
+                left: 40%;
+            }
+            #timer {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <audio controls>
+            <source src="soal11/Buka kertas-245786.mp3" type="audio/mpeg">
+        </audio>
+        <div id="timer">10</div>
+
+        <div class="quiz-container">
+            <button class="quiz-button" style="background-image: url(soal11/a.jpg);" onclick="checkAnswer('A')"></button>
+            <button class="quiz-button" style="background-image: url(soal11/jawaban\ benar\ .jpg);" onclick="checkAnswer('B')"></button>
+            <button class="quiz-button" style="background-image: url(soal11/c.jpg);" onclick="checkAnswer('C')"></button>
+            <button class="quiz-button" style="background-image: url(soal11/d.jpg);" onclick="checkAnswer('D')"></button>
+        </div>
+        
+        <script>
+        let timer = 10;
+        const timerElement = document.getElementById('timer');
+        const countdown = setInterval(() => {
+            timer--;
+            timerElement.textContent = timer;
+
+            
+            if (timer <= 0) {
+                clearInterval(countdown);
+                storeScore(0); 
+                window.location.href = 'false11.html'; 
+            }
+        }, 1000);
+
+
+        const correctAnswer = 'B';
+
+
+        function storeScore(score) {
+            let currentScore = parseInt(localStorage.getItem('score')) || 0;
+            currentScore += score;
+            localStorage.setItem('score', currentScore);
+        }
+
+
+        function checkAnswer(selectedAnswer) {
+            if (selectedAnswer === correctAnswer) {
+                storeScore(1); 
+                window.location.href = 'true11.html'
+            } else {
+                storeScore(0); 
+                window.location.href = 'false11.html'
+            }
+        }
+    
+        </script>
+    </body>
+</html>
+            
